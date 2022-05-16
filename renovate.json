@@ -12,6 +12,9 @@
     "git-submodules": {
       "enabled": true
     },
+    "nvm": {
+      "enabled": true
+    },
     "pinDigests": true,
     "dependencyDashboard": false,
     "rollbackPrs": true,
