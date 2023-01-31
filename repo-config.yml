@@ -21,7 +21,8 @@ branchProtection:
 vulnerabilityAlerts: true
 automatedSecurityFixes: true
 files:
-  license.md: |
+  license.md: null
+  LICENSE: |
     MIT License
 
     Copyright (c) 2023 Chris Nesbitt-Smith
