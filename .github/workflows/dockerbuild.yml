@@ -38,7 +38,7 @@ jobs:
 
       - name: Semver run
         id: semver
-        uses: lukaszraczylo/semver-generator@76fdbd6f5063407f527cc2df1e096a4a77033d12 # 1.10.139
+        uses: lukaszraczylo/semver-generator@403b3f115fc9371ff4bf5a64e1328d2ba99260b4 # 1.10.143
         with:
           config_file: .github/semver.yaml
           repository_local: true
