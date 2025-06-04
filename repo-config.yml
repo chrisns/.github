@@ -10,7 +10,7 @@ repo:
   allow_update_branch: true
 
 branchProtection:
-  - branch: '__DEFALT_BRANCH__'
+  - branch: '__DEFAULT_BRANCH__'
     required_status_checks:
       strict: false
       contexts: ALL
