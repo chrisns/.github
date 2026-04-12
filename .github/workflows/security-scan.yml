@@ -5,6 +5,7 @@ on:
 jobs:
   CodeQL:
     name: CodeQL
+    if: github.event.repository.visibility == 'public'
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
@@ -23,6 +24,7 @@ jobs:
       uses: github/codeql-action/analyze@3ebbd71c74ef574dbc558c82f70e52732c8b44fe # v2.2.1
 
   ShiftLeft:
+    if: github.event.repository.visibility == 'public'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
