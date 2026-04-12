@@ -89,8 +89,10 @@ files:
       github: [chrisns]
       custom: ['https://www.paypal.me/cns']
 
-  ".github/workflows/security.yml": |
-    name: "Security Scanning"
+  ".github/workflows/security.yml":
+    visibility: public
+    content: |
+      name: "Security Scanning"
     on:
       push:
         branches: [main, master]
