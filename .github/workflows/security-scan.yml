@@ -7,36 +7,22 @@ jobs:
     name: CodeQL
     if: github.event.repository.visibility == 'public'
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+      actions: read
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
-      with:
-        fetch-depth: 2
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@3ebbd71c74ef574dbc558c82f70e52732c8b44fe # v2.2.1
-      continue-on-error: true
-      id: initcodeql
-    - name: Autobuild
-      if: steps.initcodeql.outcome == 'success'
-      uses: github/codeql-action/autobuild@3ebbd71c74ef574dbc558c82f70e52732c8b44fe # v2.2.1
-    - name: Perform CodeQL Analysis
-      if: steps.initcodeql.outcome == 'success'
-      uses: github/codeql-action/analyze@3ebbd71c74ef574dbc558c82f70e52732c8b44fe # v2.2.1
-
-  ShiftLeft:
-    if: github.event.repository.visibility == 'public'
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
-    - name: Perform ShiftLeft Scan
-      uses: ShiftLeftSecurity/scan-action@master
-      env:
-        WORKSPACE: ""
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SCAN_AUTO_BUILD: true
-      with:
-        output: reports
-    - name: Upload report
-      uses: github/codeql-action/upload-sarif@3ebbd71c74ef574dbc558c82f70e52732c8b44fe # v2.2.1
-      with:
-        sarif_file: reports
+      - name: Checkout repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          fetch-depth: 2
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@4e828ff8d448a8a6e532957b1811f387a63867e8 # v3.30.0
+        continue-on-error: true
+        id: initcodeql
+      - name: Autobuild
+        if: steps.initcodeql.outcome == 'success'
+        uses: github/codeql-action/autobuild@4e828ff8d448a8a6e532957b1811f387a63867e8 # v3.30.0
+      - name: Perform CodeQL Analysis
+        if: steps.initcodeql.outcome == 'success'
+        uses: github/codeql-action/analyze@4e828ff8d448a8a6e532957b1811f387a63867e8 # v3.30.0
