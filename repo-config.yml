@@ -24,10 +24,11 @@ automatedSecurityFixes: true
 files:
   LICENSE:
     visibility: public
+    presence: true
     content: |
       MIT License
 
-      Copyright (c) 2026 Chris Nesbitt-Smith
+      Copyright (c) {{year}} Chris Nesbitt-Smith
 
       Permission is hereby granted, free of charge, to any person obtaining a copy
       of this software and associated documentation files (the "Software"), to deal
