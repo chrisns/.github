@@ -106,6 +106,8 @@ files:
           permissions:
             security-events: write
             statuses: write
+            contents: read
+            actions: read
 
   "SECURITY.md":
     visibility: public
