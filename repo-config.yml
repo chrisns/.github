@@ -9,15 +9,19 @@ repo:
   allow_auto_merge: true
   allow_update_branch: true
 
-branchProtection:
-  - branch: '__DEFAULT_BRANCH__'
-    required_status_checks:
-      strict: false
-      contexts: ALL
-    required_linear_history: true
-    enforce_admins: false
-    restrictions: null
-    required_pull_request_reviews: null
+# branchProtection removed. The `repomanager-default-branch` ruleset already
+# covers linear history, deletion, non-fast-forward and required PRs. The
+# legacy API is deprecated and 403s on every private repo (Pro-only), but the
+# real damage was `contexts: ALL`: it copied whatever check runs happened to
+# exist on the default branch into the required contexts — including jobs that
+# only ever run on the default branch. That permanently locked PRs on
+# repomanager (`publish`), bsl-experiment (`deploy`), cosign-keyless-demo
+# (`sign`) and others, plus stale contexts like `Security Scan / ShiftLeft`
+# that no longer exist. It also flapped in and out of drift every tick.
+#
+# To require specific checks again, add a `required_status_checks` rule to the
+# ruleset with an explicit context list. There is deliberately no fleet-wide
+# "whatever CI ran" equivalent — that is what caused this.
 
 vulnerabilityAlerts: true
 automatedSecurityFixes: true
