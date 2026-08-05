@@ -82,20 +82,37 @@ files:
           merge:
             method: rebase
 
-  ".github/renovate.json5": |
-    {
-      "extends": [
-        "github>chrisns/.github:renovate"
-      ]
-    }
+  # presence-only: seed it, then never touch it again. Repos legitimately add
+  # their own packageRules (cloudspendgame disables typescript and serverless
+  # majors for real, documented reasons). Content-managing this file meant
+  # repomanager deleted those rules on every tick, so the repo owner and the
+  # bot fought over the same file forever. The shared preset is pulled in by
+  # `extends`, so central changes still reach every repo without us rewriting
+  # anyone's local config.
+  ".github/renovate.json5":
+    presence: true
+    content: |
+      {
+        "extends": [
+          "github>chrisns/.github:renovate"
+        ]
+      }
   ".github/FUNDING.yml":
     visibility: public
     content: |
       github: [chrisns]
       custom: ['https://www.paypal.me/cns']
 
+  # presence-only: seed it, then leave it to Renovate. Renovate pins the
+  # reusable workflow to a SHA (`...security-scan.yml@<sha> # main`), which is
+  # the correct supply-chain posture and matches how every other action here is
+  # pinned. Content-managing this file meant repomanager un-pinned it back to
+  # `@main` on every tick — cloudspendgame cycled pin/revert three times in six
+  # hours on 3 Aug 2026. The scan logic lives in the reusable workflow, which
+  # stays centrally controlled, so this wrapper only ever needs seeding once.
   ".github/workflows/security.yml":
     visibility: public
+    presence: true
     content: |
       name: "Security Scanning"
       on:
